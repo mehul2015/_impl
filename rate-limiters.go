@@ -25,8 +25,3 @@ func (r *RateLimiter) slidingWindowLog() bool {
 func (r *RateLimiter) slidingWindowCounter() bool {
 	return true
 }
-
-func Request() {
-	//This function will simulate our request handler
-
-}
