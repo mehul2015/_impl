@@ -1,4 +1,5 @@
 from typing import List, Optional,Tuple
+
 from stacks import Stack
 from utils import Pair
 
@@ -60,7 +61,6 @@ class BinaryTree:
 
             # if self.log:
                 # print("Stack Details : ",stack.stack)
-                # print("Stack Top Currently: ",stack.peek().node.data, "Left  -> ", stack.peek().node.left.data if stack.peek().node.left is not None else None, "Right -> ",stack.peek().node.right.data if stack.peek().node.right is not None else None)
             
             self.root = root.node
         return self.root 
@@ -96,9 +96,6 @@ class BinaryTree:
         def inOrderTraverse(node : TreeNode, result : List[int]):
 
             if node is None : return
-
-            # if self.log:
-                # print("Result : ", res)
 
             inOrderTraverse(node.left, result)
             result.append(node.data)
