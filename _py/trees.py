@@ -174,15 +174,32 @@ class BinaryTree:
         return 0
     
     def max(self) -> int:
-        return 0
+
+        def traverse(node : TreeNode) -> int :
+
+            if node is None : return float("-inf")
+            
+            return max(node.data, traverse(node.left),traverse(node.right))
+        
+        return traverse(self.root)
     
     def min(self) -> int:
-        return 0
+        def traverse(node : TreeNode) -> int :
+
+            if node is None : return float("inf")
+            
+            return min(node.data, traverse(node.left),traverse(node.right))
+        
+        return traverse(self.root)
     
     def sum(self) -> int:
-        return 0
+
+        def traverse(node : TreeNode):
+            if node is None : return 0
+
+            return node.data + traverse(node.left) + traverse(node.right)
     
-    #Advanced functionality
+        return traverse(self.root)    #Advanced functionality
 
     #Alternative views
 
@@ -219,11 +236,16 @@ class BinaryTree:
 
 my_tree = BinaryTree(log=True)
 my_tree.construct(nums=[50,25,12,None,None,37,30,None,None,None,75,62,None,70,None,None,87,None,None])
-print(my_tree.size())
-print(my_tree.height())
 
 # my_tree.display()
+# print(my_tree.size())
+# print(my_tree.height())
+# print(my_tree.max())
+# print(my_tree.min())
+print(my_tree.sum())
 # print(my_tree.contains(87))
+
+
 
 
 
