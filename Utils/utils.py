@@ -7,7 +7,7 @@ class Pair:
         self.count = count
 
 
-def print_elapsed_time(task_name: str, start_time: float) -> None:
+def print_elapsed_time(start_time: float) -> None:
         elapsed_time = time.time() - start_time
         formatted_time = "{:.10f}".format(elapsed_time)
         print(Fore.GREEN + f"{formatted_time} seconds" + Style.RESET_ALL)

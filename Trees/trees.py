@@ -101,7 +101,7 @@ class BinaryTree:
             
             return (traverse(node.left,value) if node.left else False) or (traverse(node.right,value) if node.right else False)
         if self.log:
-            print_elapsed_time(task_name="Contains",start_time=start)
+            print_elapsed_time(start_time=start)
             
         return traverse(self.root,value)
 
@@ -124,7 +124,7 @@ class BinaryTree:
         print("")
         print("In Order : ",res)
         if self.log:
-            print_elapsed_time(task_name="In Order Traversal",start_time=start)
+            print_elapsed_time(start_time=start)
 
         return res
     
@@ -145,7 +145,7 @@ class BinaryTree:
         print("Pre Order : ", res)
 
         if self.log:
-            print_elapsed_time(task_name="Pre Order Traversal",start_time=start)
+            print_elapsed_time(start_time=start)
 
         return res
 
@@ -168,7 +168,7 @@ class BinaryTree:
         print("Post Order : ", res)
 
         if self.log:
-            print_elapsed_time(task_name="Post Order Traversal",start_time=start)
+            print_elapsed_time(start_time=start)
 
         return res
 
@@ -202,7 +202,7 @@ class BinaryTree:
        
         if self.log:
      
-            print_elapsed_time(task_name="Post Order Traversal",start_time=start)
+            print_elapsed_time(start_time=start)
         print("")
         return result
 
@@ -218,7 +218,7 @@ class BinaryTree:
             return 1 + size_(node.left) + size_(node.right)
         
         if self.log:
-            print_elapsed_time(task_name="Size",start_time=start)
+            print_elapsed_time(start_time=start)
 
         return size_(self.root)
     
@@ -235,7 +235,7 @@ class BinaryTree:
            return 1 + max(height_(node.left,nodes),height_(node.right,nodes))
        
        if self.log:
-            print_elapsed_time(task_name="Height",start_time=start)
+            print_elapsed_time(start_time=start)
        return height_(self.root,nodes)
     
     #TODO
@@ -251,7 +251,7 @@ class BinaryTree:
             
             return max(node.data, max_(node.left),max_(node.right))
         if self.log:
-            print_elapsed_time(task_name="Max",start_time=start)
+            print_elapsed_time(start_time=start)
         return max_(self.root)
     
     def min(self) -> int:
@@ -262,7 +262,7 @@ class BinaryTree:
             
             return min(node.data, min_(node.left),min_(node.right))
         if self.log:
-            print_elapsed_time(task_name="Min",start_time=start)
+            print_elapsed_time(start_time=start)
         return min_(self.root)
     
     def sum(self) -> int:
@@ -273,7 +273,7 @@ class BinaryTree:
 
             return node.data + sum_(node.left) + sum_(node.right)
         if self.log:
-            print_elapsed_time(task_name="Sum",start_time=start)
+            print_elapsed_time(start_time=start)
         return sum_(self.root)    
     
     #TODO
@@ -318,7 +318,7 @@ class BinaryTree:
 
         
         if self.log:
-            print_elapsed_time(task_name="IS BST",start_time=start)
+            print_elapsed_time(start_time=start)
         
         return isBST_(node = self.root,min = float("-inf"),max=float("inf"))
     
