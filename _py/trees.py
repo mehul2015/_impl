@@ -99,15 +99,15 @@ class BinaryTree:
 
         res = []
         
-        def inOrderTraverse(node : TreeNode, result : List[int]):
+        def traverse(node : TreeNode, result : List[int]):
 
             if node is None : return
 
-            if node.left : inOrderTraverse(node.left, result)
+            if node.left : traverse(node.left, result)
             result.append(node.data)
-            if node.right : inOrderTraverse(node.right,result)
+            if node.right : traverse(node.right,result)
 
-        inOrderTraverse(self.root,res)
+        traverse(self.root,res)
         print("In Order : ",res)
 
         return res
@@ -116,15 +116,15 @@ class BinaryTree:
 
         res = []
 
-        def preOrderTraverse(node : TreeNode, result : List[int]):
+        def traverse(node : TreeNode, result : List[int]):
 
             if node is None : return
 
             result.append(node.data)
-            if node.left : preOrderTraverse(node.left, result)
-            if node.right : preOrderTraverse(node.right,result)
+            if node.left : traverse(node.left, result)
+            if node.right : traverse(node.right,result)
 
-        preOrderTraverse(self.root,res)
+        traverse(self.root,res)
         print("Pre Order : ", res)
         return res
 
@@ -132,16 +132,16 @@ class BinaryTree:
 
         res = []
 
-        def postOrderTraverse(node : TreeNode, result : List[int]):
+        def traverse(node : TreeNode, result : List[int]):
 
             if node is None : return
         
 
-            if node.left : postOrderTraverse(node.left, result)
-            if node.right : postOrderTraverse(node.right,result)
+            if node.left : traverse(node.left, result)
+            if node.right : traverse(node.right,result)
             result.append(node.data)
 
-        postOrderTraverse(self.root,res)
+        traverse(self.root,res)
         print("Pre Order : ", res)
         return res
 
@@ -153,35 +153,35 @@ class BinaryTree:
     
     def size (self) -> int :
 
-        def traverse(node : TreeNode) -> int:
+        def size_(node : TreeNode) -> int:
             
             if node is None : return 0
-            return 1 + traverse(node.left) + traverse(node.right)
+            return 1 + size_(node.left) + size_(node.right)
 
-        return traverse(self.root)
+        return size_(self.root)
  
     def height(self) -> int:
 
-       def traverse(node:TreeNode):
+       def height_(node:TreeNode):
            
            if node is None : return 0
 
-           return 1 + max(traverse(node.left),traverse(node.right))
+           return 1 + max(height_(node.left),height_(node.right))
        
-       return traverse(self.root)
+       return height_(self.root)
     
     def diameter(self) -> int:
         return 0
     
     def max(self) -> int:
 
-        def traverse(node : TreeNode) -> int :
+        def max_(node : TreeNode) -> int :
 
             if node is None : return float("-inf")
             
-            return max(node.data, traverse(node.left),traverse(node.right))
+            return max(node.data, max_(node.left),max_(node.right))
         
-        return traverse(self.root)
+        return max_(self.root)
     
     def min(self) -> int:
         def traverse(node : TreeNode) -> int :
@@ -194,12 +194,14 @@ class BinaryTree:
     
     def sum(self) -> int:
 
-        def traverse(node : TreeNode):
+        def sum_(node : TreeNode):
             if node is None : return 0
 
-            return node.data + traverse(node.left) + traverse(node.right)
+            return node.data + sum_(node.left) + sum_(node.right)
     
-        return traverse(self.root)    #Advanced functionality
+        return sum_(self.root)    
+    
+    #Advanced functionality
 
     #Alternative views
 
@@ -237,13 +239,13 @@ class BinaryTree:
 my_tree = BinaryTree(log=True)
 my_tree.construct(nums=[50,25,12,None,None,37,30,None,None,None,75,62,None,70,None,None,87,None,None])
 
-# my_tree.display()
-# print(my_tree.size())
-# print(my_tree.height())
-# print(my_tree.max())
-# print(my_tree.min())
+my_tree.display()
+print(my_tree.size())
+print(my_tree.height())
+print(my_tree.max())
+print(my_tree.min())
 print(my_tree.sum())
-# print(my_tree.contains(87))
+print(my_tree.contains(87))
 
 
 
