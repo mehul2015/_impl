@@ -1,105 +1,146 @@
 from typing import List, Optional,Tuple
 from stacks import Stack
+from utils import Pair
+
 
 class TreeNode:
 
-    def __init__(self, data: Optional[int] = None, left: Optional["TreeNode"] = None, right: Optional["TreeNode"] = None) -> None:
+    def __init__(self, data: Optional[int] = None) -> None:
         self.data = data
-        self.left = left
-        self.right = right
+        self.left = None
+        self.right = None
+
+
 
 class BinaryTree:
-
-    root : Optional[TreeNode] = None
     
-    def __init__(self) -> None:
+    def __init__(self,log : bool) -> None:
         self.root = None
-
-      
+        self.log = log
 
     def construct(self, nums: List[int]) -> Optional[TreeNode] :
+
+        if len(nums) == 0: return None
+        if len(nums) == 1 : return nums[0]
+
         stack = Stack()
 
-        for num in nums:
-           if num is None:
-               if not stack.isEmpty():
-                   stack.pop()
-               else:
-                   return "The input array is incorrect and a valid Binary Tree could not be generated!"
-           else:
-               new_node = TreeNode(data=num)
-               if stack.isEmpty():
-                   self.root = new_node
-               else:
-                  
-                   parent_node = stack.peek()
-                   if parent_node.left is not None:
-                       parent_node.right = new_node
-                   else:
-                       parent_node.left = new_node
+        root = Pair(node=TreeNode(nums[0]),count=1)
+        index = 0
 
-               stack.append(new_node)
-                    
+        stack.append(root)
+
+        while(not stack.isEmpty()):
+
+            top = stack.peek()
+
+            if top.count == 1:
+                index+=1
+                if nums[index]:
+                    new_node = TreeNode(data=nums[index]) 
+                    top.node.left = new_node
+                    stack.append(Pair(node=new_node,count=1))
+                else:
+                    top.node.left=None
+
+                top.count+=1
+
+            elif top.count == 2:
+                index+=1
+                if nums[index]:
+                    new_node = TreeNode(data=nums[index]) 
+                    top.node.right = new_node
+                    stack.append(Pair(node=new_node,count=1))
+                else:
+                    top.node.right=None
+
+                top.count+=1
+
+            else: stack.pop()
+
+            # if self.log:
+                # print("Stack Details : ",stack.stack)
+                # print("Stack Top Currently: ",stack.peek().node.data, "Left  -> ", stack.peek().node.left.data if stack.peek().node.left is not None else None, "Right -> ",stack.peek().node.right.data if stack.peek().node.right is not None else None)
+            
+            self.root = root.node
         return self.root 
         
     def display(self):
 
         if self.root is None :
-            print("Root is None") 
-            print(self.root)
+            if self.log:
+                print("Root is None!")
             return
 
-        print("In Order : ",self.inOrder())
-        print("Pre Order : ",self.preOrder())
-        print("Post Order : ",self.postOrder())
+        self.inOrder()
+        self.preOrder()
+        self.postOrder()
 
-        
+    def insert(self, value : int):
+        print("Inserted")
+    
+    def contains(self, value : int) -> bool:
+        return False
+    
+    def delete(self,value : int):
+        print("Deleted")
 
        
 
     #Traversals
 
     def inOrder(self) -> List[int]:
+
         res = []
-        res = self.inOrderTraverse(self.root,res)
+        
+        def inOrderTraverse(node : TreeNode, result : List[int]):
+
+            if node is None : return
+
+            # if self.log:
+                # print("Result : ", res)
+
+            inOrderTraverse(node.left, result)
+            result.append(node.data)
+            inOrderTraverse(node.right,result)
+
+        inOrderTraverse(self.root,res)
+        print("In Order : ",res)
+
         return res
     
-    def inOrderTraverse(self, node : TreeNode, result : List[int]):
-
-        if node is None : return
-
-        self.inOrderTraverse(node.left, result)
-        result.append(node.data)
-        self.inOrderTraverse(node.right,result)
-
-        
-
     def preOrder(self) -> List[int]:
+
         res = []
-        res = self.preOrderTraverse(self.root,res)
+
+        def preOrderTraverse(node : TreeNode, result : List[int]):
+
+            if node is None : return
+
+            result.append(node.data)
+            preOrderTraverse(node.left, result)
+            preOrderTraverse(node.right,result)
+
+        preOrderTraverse(self.root,res)
+        print("Pre Order : ", res)
         return res
-
-    def preOrderTraverse(self, node : TreeNode, result : List[int]):
-
-        if node is None : return
-
-        result.append(node.data)
-        self.preOrderTraverse(node.left, result)
-        self.preOrderTraverse(node.right,result)
 
     def postOrder(self) -> List[int]:
+
         res = []
-        res = self.postOrderTraverse(self.root,res)
-        return res
 
-    def postOrderTraverse(self, node : TreeNode, result : List[int]):
+        def postOrderTraverse(node : TreeNode, result : List[int]):
 
-        if node is None : return
+            if node is None : return
         
 
-        self.postOrderTraverse(node.left, result)
-        self.postOrderTraverse(node.right,result)
-        result.append(node.data)
+            postOrderTraverse(node.left, result)
+            postOrderTraverse(node.right,result)
+            result.append(node.data)
+
+        postOrderTraverse(self.root,res)
+        print("Pre Order : ", res)
+        return res
 
     def levelOrder(self) -> List[int]:
         return []
@@ -144,7 +185,7 @@ class BinaryTree:
     def bottomView(self) -> List[int]:
         return []
     
-    #New Tree that answers a lot of leetcode possibilities
+    #Additional utilities
 
     def invert(self) -> Optional["TreeNode"]:
         return TreeNode()
@@ -162,11 +203,10 @@ class BinaryTree:
         return True,[]
     
 
-    
 
-    
-    
+my_tree = BinaryTree(log=True)
+my_tree.construct(nums=[50,25,12,None,None,37,30,None,None,None,75,62,None,70,None,None,87,None,None])
+my_tree.display()
 
-my_tree = BinaryTree()
-my_tree_root = my_tree.construct(nums=[50,25,12,None,None,37,30,None,None,None,75,62,None,70,None,None,87,None,None])
-print(my_tree_root)
+
+
