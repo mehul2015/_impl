@@ -6,15 +6,12 @@ sys.path.append("/Users/mehulchattopadhyay/Desktop/_L/sys")
 from Stacks.stacks import Stack
 from Utils.utils import Pair
 
-
 class TreeNode:
 
     def __init__(self, data: Optional[int] = None) -> None:
         self.data = data
         self.left = None
         self.right = None
-
-
 
 class BinaryTree:
     
