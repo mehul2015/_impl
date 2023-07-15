@@ -1,8 +1,10 @@
+import sys
 from typing import List, Optional,Tuple
-from colorama import Fore,Back
 
-from stacks import Stack
-from utils import Pair
+sys.path.append("/Users/mehulchattopadhyay/Desktop/_L/sys")
+
+from Stacks.stacks import Stack
+from Utils.utils import Pair
 
 
 class TreeNode:
@@ -247,12 +249,12 @@ class BinaryTree:
 my_tree = BinaryTree(log=False)
 my_tree.construct(nums=[50,25,12,None,None,37,30,None,None,None,75,62,None,70,None,None,87,None,None])
 
-# print(my_tree.size())
-# print(my_tree.height())
-# print(my_tree.max())
-# print(my_tree.min())
-# print(my_tree.sum())
-# print(my_tree.contains(87))
+print(my_tree.size())
+print(my_tree.height())
+print(my_tree.max())
+print(my_tree.min())
+print(my_tree.sum())
+print(my_tree.contains(87))
 
 
 
