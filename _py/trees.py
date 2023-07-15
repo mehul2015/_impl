@@ -93,9 +93,6 @@ class BinaryTree:
         return traverse(self.root,value)
 
 
-
-       
-
     #Traversals
 
     def inOrder(self) -> List[int]:
@@ -155,13 +152,23 @@ class BinaryTree:
     # Utility functions
     
     def size (self) -> int :
-        return 0
-    
+
+        def traverse(node : TreeNode) -> int:
+            
+            if node is None : return 0
+            return 1 + traverse(node.left) + traverse(node.right)
+
+        return traverse(self.root)
+ 
     def height(self) -> int:
-        return 0
-    
-    def maxDepth(self) -> int:
-        return 0
+
+       def traverse(node:TreeNode):
+           
+           if node is None : return 0
+
+           return 1 + max(traverse(node.left),traverse(node.right))
+       
+       return traverse(self.root)
     
     def diameter(self) -> int:
         return 0
@@ -212,8 +219,12 @@ class BinaryTree:
 
 my_tree = BinaryTree(log=True)
 my_tree.construct(nums=[50,25,12,None,None,37,30,None,None,None,75,62,None,70,None,None,87,None,None])
-my_tree.display()
-print(my_tree.contains(87))
+print(my_tree.size())
+print(my_tree.height())
+
+# my_tree.display()
+# print(my_tree.contains(87))
+
 
 
 
