@@ -12,7 +12,10 @@ class Stack:
         
         element_to_be_popped = self.stack[-1]
         self.stack = self.stack[0:len(self.stack) - 1]
-        return element_to_be_popped        
+        return element_to_be_popped     
+
+    def size(self):
+        return len(self.stack)   
     
     def peek(self):
        if self.isEmpty():

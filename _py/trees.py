@@ -1,4 +1,5 @@
 from typing import List, Optional,Tuple
+from colorama import Fore,Back
 
 from stacks import Stack
 from utils import Pair
@@ -36,7 +37,10 @@ class BinaryTree:
             top = stack.peek()
 
             if top.count == 1:
+                
                 index+=1
+             
+        
                 if nums[index]:
                     new_node = TreeNode(data=nums[index]) 
                     top.node.left = new_node
@@ -47,7 +51,10 @@ class BinaryTree:
                 top.count+=1
 
             elif top.count == 2:
+                
                 index+=1
+              
+         
                 if nums[index]:
                     new_node = TreeNode(data=nums[index]) 
                     top.node.right = new_node
@@ -63,6 +70,7 @@ class BinaryTree:
                 # print("Stack Details : ",stack.stack)
             
             self.root = root.node
+        self.display()
         return self.root 
         
     def display(self):
@@ -236,16 +244,15 @@ class BinaryTree:
     
 
 
-my_tree = BinaryTree(log=True)
+my_tree = BinaryTree(log=False)
 my_tree.construct(nums=[50,25,12,None,None,37,30,None,None,None,75,62,None,70,None,None,87,None,None])
 
-my_tree.display()
-print(my_tree.size())
-print(my_tree.height())
-print(my_tree.max())
-print(my_tree.min())
-print(my_tree.sum())
-print(my_tree.contains(87))
+# print(my_tree.size())
+# print(my_tree.height())
+# print(my_tree.max())
+# print(my_tree.min())
+# print(my_tree.sum())
+# print(my_tree.contains(87))
 
 
 
