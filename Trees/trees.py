@@ -1,10 +1,13 @@
 import sys
 from typing import List, Optional,Tuple
+import time
+from colorama import Fore,Style
 
 sys.path.append("/Users/mehulchattopadhyay/Desktop/_L/sys")
 
 from Stacks.stacks import Stack
 from Utils.utils import Pair
+from Queues.queues import Queue
 
 class TreeNode:
 
@@ -71,7 +74,6 @@ class BinaryTree:
             self.root = root.node
         self.display()
         return self.root 
-        
     def display(self):
 
         if self.root is None :
@@ -82,6 +84,7 @@ class BinaryTree:
         self.inOrder()
         self.preOrder()
         self.postOrder()
+        self.levelOrder()
 
     def contains(self, value : int) -> bool:
 
@@ -103,7 +106,7 @@ class BinaryTree:
     #Traversals
 
     def inOrder(self) -> List[int]:
-
+        start = time.time()
         res = []
         
         def traverse(node : TreeNode, result : List[int]):
@@ -115,12 +118,17 @@ class BinaryTree:
             if node.right : traverse(node.right,result)
 
         traverse(self.root,res)
+        print("")
         print("In Order : ",res)
+        if self.log:
+            elapsed_time = time.time() - start
+            formatted_time = "{:.10f}".format(elapsed_time)
+            print(Fore.GREEN + "Time Elapsed in In-order traversal:", formatted_time, "seconds" + Style.RESET_ALL)
 
         return res
     
     def preOrder(self) -> List[int]:
-
+        start = time.time()
         res = []
 
         def traverse(node : TreeNode, result : List[int]):
@@ -132,10 +140,16 @@ class BinaryTree:
             if node.right : traverse(node.right,result)
 
         traverse(self.root,res)
+        print("")
         print("Pre Order : ", res)
+        if self.log:
+            elapsed_time = time.time() - start
+            formatted_time = "{:.10f}".format(elapsed_time)
+            print(Fore.GREEN + "Time Elapsed in pre-order traversal:", formatted_time, "seconds" + Style.RESET_ALL)
         return res
 
     def postOrder(self) -> List[int]:
+        start = time.time()
 
         res = []
 
@@ -149,11 +163,51 @@ class BinaryTree:
             result.append(node.data)
 
         traverse(self.root,res)
+        print("")
         print("Post Order : ", res)
+        if self.log:
+            elapsed_time = time.time() - start
+            formatted_time = "{:.10f}".format(elapsed_time)
+            print(Fore.GREEN + "Time Elapsed in post-order traversal:", formatted_time, "seconds" + Style.RESET_ALL)
         return res
 
-    def levelOrder(self) -> List[int]:
-        return []
+    def levelOrder(self) -> List[List[int]]:
+
+        start = time.time()
+        if self.root is None : return []
+        result = []
+        queue = Queue()
+
+        queue.enqueue(self.root)
+
+        
+        while(not queue.isEmpty()):
+            current_level = []
+            for _ in range(queue.size()):
+                current_node = queue.dequeue()
+                current_level.append(current_node.data)
+
+                if current_node.left : queue.enqueue(current_node.left)
+                if current_node.right : queue.enqueue(current_node.right)
+            
+            result.append(current_level)
+        
+
+        print("")
+        print("Level Order : ")
+        print("")
+        for index,nodes in enumerate(result):
+            print(f" Level {index + 1} :",nodes)
+
+        if self.log:
+            elapsed_time = time.time() - start
+            formatted_time = "{:.10f}".format(elapsed_time)
+            print(Fore.GREEN + "Time Elapsed in level order traversal:", formatted_time, "seconds" + Style.RESET_ALL)
+
+        return result
+
+
+        
 
 
     # Utility functions
@@ -248,16 +302,16 @@ class BinaryTree:
     
 
 
-my_tree = BinaryTree(log=False)
-# my_tree.construct(nums=[50,25,12,None,None,37,30,None,None,None,75,62,None,70,None,None,87,None,None])
-my_tree.construct(nums=[1,2,None,None,3,None,None])
+my_tree = BinaryTree(log=True)
+my_tree.construct(nums=[50,25,12,None,None,37,30,None,None,None,75,62,None,70,None,None,87,None,None])
+# my_tree.construct(nums=[1,2,None,None,3,None,None])
 
-print(my_tree.size())
-print(my_tree.height())
-print(my_tree.max())
-print(my_tree.min())
-print(my_tree.sum())
-print(my_tree.contains(87))
+# print(my_tree.size())
+# print(my_tree.height())
+# print(my_tree.max())
+# print(my_tree.min())
+# print(my_tree.sum())
+# print(my_tree.contains(87))
 
 
 

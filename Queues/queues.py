@@ -14,7 +14,7 @@ class Queue:
         return element_to_be_popped
     
     def isEmpty(self) -> bool:
-        return self.queue.size() <= 0 
+        return self.size() <= 0 
 
     def size(self) -> int:
         return len(self.queue)
