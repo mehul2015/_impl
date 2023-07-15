@@ -53,7 +53,7 @@
       - [Binary Search Tree Check](#binary-search-tree-check)
     - [`isBST(self) -> bool`](#isbstself---bool)
       - [Path Sum](#path-sum)
-    - [\`](#)
+    - [`pathSum(self, target: int) -> Tuple[bool, List[int]]`](#pathsumself-target-int---tuplebool-listint)
 
 ## Class Overview
 
@@ -217,13 +217,23 @@ The `BinaryTree` class represents a binary tree data structure. It consists of n
 
 #### Path Sum
 
-### `
-
-pathSum(self, target: int) -> Tuple[bool, List[int]]`
+### `pathSum(self, target: int) -> Tuple[bool, List[int]]`
 
 - Finds a path in the binary tree that sums up to the given target value.
 - Parameters:
   - `target` (int): The target value to find the path sum for.
 - Returns: A tuple containing a boolean indicating whether a path sum was found (`True` if found, `False` otherwise), and a list of values representing the path from the root to a leaf node that sums up to the target.
 
-This concludes the documentation for the `BinaryTree` class. Have fun exploring and using the features of this class! 🌳😊
+---
+
+**Note: The following functionalities are pending implementation:**
+
+- Alternative Views:
+  - Level Order Traversal (TODO: Implement)
+- Additional Utilities:
+  - Diameter (TODO: Implement)
+  - Lowest Common Ancestor (TODO: Implement)
+
+---
+
+This concludes the documentation for the `BinaryTree` class. The remaining functionalities such as level order traversal, diameter calculation, and finding the lowest common ancestor are pending implementation. You can add these features to enhance the functionality of your binary tree. 🌳😊
