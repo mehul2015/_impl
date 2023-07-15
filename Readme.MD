@@ -1,6 +1,6 @@
 # Project Documentation
 
-🌳 Welcome to the project documentation for your repository! This repository contains various modules for different data structures, including `Graphs`, `Linked List`, `Queues`, `Stacks`, `Trees`, `Tries`, and `Utils`. Each module provides implementations and functionalities for the respective data structure.
+🌳 This repository contains various modules for different data structures, including `Queues`, `Stacks`, `Trees` and `Utils`. Each module provides implementations and functionalities for the respective data structure.
 
 
 <!-- - The `Graphs` directory contains the `graphs.py` module, which provides implementations and functionalities related to graph data structures.
