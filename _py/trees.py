@@ -76,14 +76,23 @@ class BinaryTree:
         self.preOrder()
         self.postOrder()
 
-    def insert(self, value : int):
-        print("Inserted")
-    
     def contains(self, value : int) -> bool:
-        return False
-    
-    def delete(self,value : int):
-        print("Deleted")
+
+        if self.root is None : return False
+        if self.root.data == value : return True
+
+        def traverse(node : TreeNode,value : int) -> bool:
+
+            if not node : return False
+
+            if node.data == value : 
+               return True
+            
+            return (traverse(node.left,value) if node.left else False) or (traverse(node.right,value) if node.right else False)
+            
+        return traverse(self.root,value)
+
+
 
        
 
@@ -97,9 +106,9 @@ class BinaryTree:
 
             if node is None : return
 
-            inOrderTraverse(node.left, result)
+            if node.left : inOrderTraverse(node.left, result)
             result.append(node.data)
-            inOrderTraverse(node.right,result)
+            if node.right : inOrderTraverse(node.right,result)
 
         inOrderTraverse(self.root,res)
         print("In Order : ",res)
@@ -115,8 +124,8 @@ class BinaryTree:
             if node is None : return
 
             result.append(node.data)
-            preOrderTraverse(node.left, result)
-            preOrderTraverse(node.right,result)
+            if node.left : preOrderTraverse(node.left, result)
+            if node.right : preOrderTraverse(node.right,result)
 
         preOrderTraverse(self.root,res)
         print("Pre Order : ", res)
@@ -131,8 +140,8 @@ class BinaryTree:
             if node is None : return
         
 
-            postOrderTraverse(node.left, result)
-            postOrderTraverse(node.right,result)
+            if node.left : postOrderTraverse(node.left, result)
+            if node.right : postOrderTraverse(node.right,result)
             result.append(node.data)
 
         postOrderTraverse(self.root,res)
@@ -204,6 +213,7 @@ class BinaryTree:
 my_tree = BinaryTree(log=True)
 my_tree.construct(nums=[50,25,12,None,None,37,30,None,None,None,75,62,None,70,None,None,87,None,None])
 my_tree.display()
+print(my_tree.contains(87))
 
 
 
