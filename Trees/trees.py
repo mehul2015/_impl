@@ -1,12 +1,12 @@
 import sys
 from typing import List, Optional,Tuple
 import time
-from colorama import Fore,Style
+
 
 sys.path.append("/Users/mehulchattopadhyay/Desktop/_L/sys")
 
 from Stacks.stacks import Stack
-from Utils.utils import Pair
+from Utils.utils import Pair,print_elapsed_time
 from Queues.queues import Queue
 
 class TreeNode:
@@ -101,9 +101,8 @@ class BinaryTree:
             
             return (traverse(node.left,value) if node.left else False) or (traverse(node.right,value) if node.right else False)
         if self.log:
-            elapsed_time = time.time() - start
-            formatted_time = "{:.10f}".format(elapsed_time)
-            print(Fore.GREEN + "Time Elapsed in contains function:", formatted_time, "seconds" + Style.RESET_ALL)
+            print_elapsed_time(task_name="Contains",start_time=start)
+            
         return traverse(self.root,value)
 
 
@@ -125,9 +124,7 @@ class BinaryTree:
         print("")
         print("In Order : ",res)
         if self.log:
-            elapsed_time = time.time() - start
-            formatted_time = "{:.10f}".format(elapsed_time)
-            print(Fore.GREEN + "Time Elapsed in In-order traversal:", formatted_time, "seconds" + Style.RESET_ALL)
+            print_elapsed_time(task_name="In Order Traversal",start_time=start)
 
         return res
     
@@ -148,9 +145,7 @@ class BinaryTree:
         print("Pre Order : ", res)
 
         if self.log:
-            elapsed_time = time.time() - start
-            formatted_time = "{:.10f}".format(elapsed_time)
-            print(Fore.GREEN + "Time Elapsed in pre-order traversal:", formatted_time, "seconds" + Style.RESET_ALL)
+            print_elapsed_time(task_name="Pre Order Traversal",start_time=start)
 
         return res
 
@@ -173,9 +168,7 @@ class BinaryTree:
         print("Post Order : ", res)
 
         if self.log:
-            elapsed_time = time.time() - start
-            formatted_time = "{:.10f}".format(elapsed_time)
-            print(Fore.GREEN + "Time Elapsed in post-order traversal:", formatted_time, "seconds" + Style.RESET_ALL)
+            print_elapsed_time(task_name="Post Order Traversal",start_time=start)
 
         return res
 
@@ -206,12 +199,11 @@ class BinaryTree:
         print("")
         for index,nodes in enumerate(result):
             print(f" Level {index + 1} :",nodes)
-
+       
         if self.log:
-            elapsed_time = time.time() - start
-            formatted_time = "{:.10f}".format(elapsed_time)
-            print(Fore.GREEN + "Time Elapsed in level order traversal:", formatted_time, "seconds" + Style.RESET_ALL)
-
+     
+            print_elapsed_time(task_name="Post Order Traversal",start_time=start)
+        print("")
         return result
 
 
@@ -226,9 +218,7 @@ class BinaryTree:
             return 1 + size_(node.left) + size_(node.right)
         
         if self.log:
-            elapsed_time = time.time() - start
-            formatted_time = "{:.10f}".format(elapsed_time)
-            print(Fore.GREEN + "Time Elapsed in finding size of tree :", formatted_time, "seconds" + Style.RESET_ALL)
+            print_elapsed_time(task_name="Size",start_time=start)
 
         return size_(self.root)
     
@@ -245,9 +235,7 @@ class BinaryTree:
            return 1 + max(height_(node.left,nodes),height_(node.right,nodes))
        
        if self.log:
-            elapsed_time = time.time() - start
-            formatted_time = "{:.10f}".format(elapsed_time)
-            print(Fore.GREEN + "Time Elapsed in finding height of tree:", formatted_time, "seconds" + Style.RESET_ALL)
+            print_elapsed_time(task_name="Height",start_time=start)
        return height_(self.root,nodes)
     
     #TODO
@@ -263,9 +251,7 @@ class BinaryTree:
             
             return max(node.data, max_(node.left),max_(node.right))
         if self.log:
-            elapsed_time = time.time() - start
-            formatted_time = "{:.10f}".format(elapsed_time)
-            print(Fore.GREEN + "Time Elapsed in finding max value in tree:", formatted_time, "seconds" + Style.RESET_ALL)
+            print_elapsed_time(task_name="Max",start_time=start)
         return max_(self.root)
     
     def min(self) -> int:
@@ -276,9 +262,7 @@ class BinaryTree:
             
             return min(node.data, min_(node.left),min_(node.right))
         if self.log:
-            elapsed_time = time.time() - start
-            formatted_time = "{:.10f}".format(elapsed_time)
-            print(Fore.GREEN + "Time Elapsed in finding min value in tree :", formatted_time, "seconds" + Style.RESET_ALL)
+            print_elapsed_time(task_name="Min",start_time=start)
         return min_(self.root)
     
     def sum(self) -> int:
@@ -289,9 +273,7 @@ class BinaryTree:
 
             return node.data + sum_(node.left) + sum_(node.right)
         if self.log:
-            elapsed_time = time.time() - start
-            formatted_time = "{:.10f}".format(elapsed_time)
-            print(Fore.GREEN + "Time Elapsed in finding sum of nodes in tree:", formatted_time, "seconds" + Style.RESET_ALL)
+            print_elapsed_time(task_name="Sum",start_time=start)
         return sum_(self.root)    
     
     #TODO
@@ -336,9 +318,7 @@ class BinaryTree:
 
         
         if self.log:
-            elapsed_time = time.time() - start
-            formatted_time = "{:.10f}".format(elapsed_time)
-            print(Fore.GREEN + "Time Elapsed in finding if tree is BST:", formatted_time, "seconds" + Style.RESET_ALL)
+            print_elapsed_time(task_name="IS BST",start_time=start)
         
         return isBST_(node = self.root,min = float("-inf"),max=float("inf"))
     
@@ -354,8 +334,8 @@ my_tree.construct(nums=[50,25,12,None,None,37,30,None,None,None,75,62,None,70,No
 print("Size : ",my_tree.size(),end='\n\n')
 print("Height :", my_tree.height(),end='\n\n')
 print("Max Value in tree : ",my_tree.max(),end='\n\n')
-print("Max Value in tree : ",my_tree.min(),end='\n\n')
-print("Max Value in tree : ",my_tree.sum(),end='\n\n')
+print("Min Value in tree : ",my_tree.min(),end='\n\n')
+print("Sum of nodes : ",my_tree.sum(),end='\n\n')
 print("Tree Contains given value : ",my_tree.contains(345),end='\n\n')
 print("Given tree is BST : ",my_tree.isBST(),end='\n\n')
 
