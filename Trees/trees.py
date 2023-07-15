@@ -149,7 +149,7 @@ class BinaryTree:
             result.append(node.data)
 
         traverse(self.root,res)
-        print("Pre Order : ", res)
+        print("Post Order : ", res)
         return res
 
     def levelOrder(self) -> List[int]:
@@ -166,16 +166,19 @@ class BinaryTree:
             return 1 + size_(node.left) + size_(node.right)
 
         return size_(self.root)
- 
-    def height(self) -> int:
+    
+    #Defaults to using edges as the parameter for calculating height unless specified as nodes = True
+    def height(self,nodes : bool | None = False) -> int:
 
-       def height_(node:TreeNode):
+       def height_(node:TreeNode,nodes : bool):
            
-           if node is None : return 0
+           if node is None :
+               if nodes: return 0
+               else : return -1
 
-           return 1 + max(height_(node.left),height_(node.right))
+           return 1 + max(height_(node.left,nodes),height_(node.right,nodes))
        
-       return height_(self.root)
+       return height_(self.root,nodes)
     
     #TODO
     def diameter(self) -> int:
@@ -228,7 +231,7 @@ class BinaryTree:
     
     #Additional utilities
 
-    def invert(self) -> Optional["TreeNode"]:
+    def invert(self) -> Optional[TreeNode]:
         return TreeNode()
     
     def isSymmetric(self) -> bool :
@@ -246,7 +249,8 @@ class BinaryTree:
 
 
 my_tree = BinaryTree(log=False)
-my_tree.construct(nums=[50,25,12,None,None,37,30,None,None,None,75,62,None,70,None,None,87,None,None])
+# my_tree.construct(nums=[50,25,12,None,None,37,30,None,None,None,75,62,None,70,None,None,87,None,None])
+my_tree.construct(nums=[1,2,None,None,3,None,None])
 
 print(my_tree.size())
 print(my_tree.height())
