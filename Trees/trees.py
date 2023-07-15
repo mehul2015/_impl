@@ -74,6 +74,7 @@ class BinaryTree:
             self.root = root.node
         self.display()
         return self.root 
+    
     def display(self):
 
         if self.root is None :
@@ -87,7 +88,7 @@ class BinaryTree:
         self.levelOrder()
 
     def contains(self, value : int) -> bool:
-
+        start = time.time()
         if self.root is None : return False
         if self.root.data == value : return True
 
@@ -99,7 +100,10 @@ class BinaryTree:
                return True
             
             return (traverse(node.left,value) if node.left else False) or (traverse(node.right,value) if node.right else False)
-            
+        if self.log:
+            elapsed_time = time.time() - start
+            formatted_time = "{:.10f}".format(elapsed_time)
+            print(Fore.GREEN + "Time Elapsed in contains function:", formatted_time, "seconds" + Style.RESET_ALL)
         return traverse(self.root,value)
 
 
@@ -142,10 +146,12 @@ class BinaryTree:
         traverse(self.root,res)
         print("")
         print("Pre Order : ", res)
+
         if self.log:
             elapsed_time = time.time() - start
             formatted_time = "{:.10f}".format(elapsed_time)
             print(Fore.GREEN + "Time Elapsed in pre-order traversal:", formatted_time, "seconds" + Style.RESET_ALL)
+
         return res
 
     def postOrder(self) -> List[int]:
@@ -165,10 +171,12 @@ class BinaryTree:
         traverse(self.root,res)
         print("")
         print("Post Order : ", res)
+
         if self.log:
             elapsed_time = time.time() - start
             formatted_time = "{:.10f}".format(elapsed_time)
             print(Fore.GREEN + "Time Elapsed in post-order traversal:", formatted_time, "seconds" + Style.RESET_ALL)
+
         return res
 
     def levelOrder(self) -> List[List[int]]:
@@ -207,22 +215,26 @@ class BinaryTree:
         return result
 
 
-        
-
-
     # Utility functions
     
     def size (self) -> int :
+        start = time.time()
 
         def size_(node : TreeNode) -> int:
             
             if node is None : return 0
             return 1 + size_(node.left) + size_(node.right)
+        
+        if self.log:
+            elapsed_time = time.time() - start
+            formatted_time = "{:.10f}".format(elapsed_time)
+            print(Fore.GREEN + "Time Elapsed in finding size of tree :", formatted_time, "seconds" + Style.RESET_ALL)
 
         return size_(self.root)
     
     #Defaults to using edges as the parameter for calculating height unless specified as nodes = True
     def height(self,nodes : bool | None = False) -> int:
+       start = time.time()
 
        def height_(node:TreeNode,nodes : bool):
            
@@ -232,6 +244,10 @@ class BinaryTree:
 
            return 1 + max(height_(node.left,nodes),height_(node.right,nodes))
        
+       if self.log:
+            elapsed_time = time.time() - start
+            formatted_time = "{:.10f}".format(elapsed_time)
+            print(Fore.GREEN + "Time Elapsed in finding height of tree:", formatted_time, "seconds" + Style.RESET_ALL)
        return height_(self.root,nodes)
     
     #TODO
@@ -239,31 +255,43 @@ class BinaryTree:
         return 0
     
     def max(self) -> int:
+        start = time.time()
 
         def max_(node : TreeNode) -> int :
 
             if node is None : return float("-inf")
             
             return max(node.data, max_(node.left),max_(node.right))
-        
+        if self.log:
+            elapsed_time = time.time() - start
+            formatted_time = "{:.10f}".format(elapsed_time)
+            print(Fore.GREEN + "Time Elapsed in finding max value in tree:", formatted_time, "seconds" + Style.RESET_ALL)
         return max_(self.root)
     
     def min(self) -> int:
-        def traverse(node : TreeNode) -> int :
+        start = time.time()        
+        def min_(node : TreeNode) -> int :
 
             if node is None : return float("inf")
             
-            return min(node.data, traverse(node.left),traverse(node.right))
-        
-        return traverse(self.root)
+            return min(node.data, min_(node.left),min_(node.right))
+        if self.log:
+            elapsed_time = time.time() - start
+            formatted_time = "{:.10f}".format(elapsed_time)
+            print(Fore.GREEN + "Time Elapsed in finding min value in tree :", formatted_time, "seconds" + Style.RESET_ALL)
+        return min_(self.root)
     
     def sum(self) -> int:
 
+        start = time.time()
         def sum_(node : TreeNode):
             if node is None : return 0
 
             return node.data + sum_(node.left) + sum_(node.right)
-    
+        if self.log:
+            elapsed_time = time.time() - start
+            formatted_time = "{:.10f}".format(elapsed_time)
+            print(Fore.GREEN + "Time Elapsed in finding sum of nodes in tree:", formatted_time, "seconds" + Style.RESET_ALL)
         return sum_(self.root)    
     
     #TODO
@@ -295,7 +323,24 @@ class BinaryTree:
         return False
     
     def isBST(self) -> bool:
-        return False
+
+        start = time.time()
+
+        def isBST_(node : TreeNode,min : int, max : int) -> bool:
+
+            if node is None : return True
+
+            if node.data <= min or node.data >= max : return False
+
+            return isBST_(node.left,min,node.data) and isBST_(node.right,node.data,max)
+
+        
+        if self.log:
+            elapsed_time = time.time() - start
+            formatted_time = "{:.10f}".format(elapsed_time)
+            print(Fore.GREEN + "Time Elapsed in finding if tree is BST:", formatted_time, "seconds" + Style.RESET_ALL)
+        
+        return isBST_(node = self.root,min = float("-inf"),max=float("inf"))
     
     def pathSum(self, target : int) -> Tuple[bool,List[int]]:
         return True,[]
@@ -306,12 +351,13 @@ my_tree = BinaryTree(log=True)
 my_tree.construct(nums=[50,25,12,None,None,37,30,None,None,None,75,62,None,70,None,None,87,None,None])
 # my_tree.construct(nums=[1,2,None,None,3,None,None])
 
-# print(my_tree.size())
-# print(my_tree.height())
-# print(my_tree.max())
-# print(my_tree.min())
-# print(my_tree.sum())
-# print(my_tree.contains(87))
+print("Size : ",my_tree.size(),end='\n\n')
+print("Height :", my_tree.height(),end='\n\n')
+print("Max Value in tree : ",my_tree.max(),end='\n\n')
+print("Max Value in tree : ",my_tree.min(),end='\n\n')
+print("Max Value in tree : ",my_tree.sum(),end='\n\n')
+print("Tree Contains given value : ",my_tree.contains(345),end='\n\n')
+print("Given tree is BST : ",my_tree.isBST(),end='\n\n')
 
 
 
