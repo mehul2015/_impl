@@ -177,6 +177,7 @@ class BinaryTree:
        
        return height_(self.root)
     
+    #TODO
     def diameter(self) -> int:
         return 0
     
@@ -208,10 +209,11 @@ class BinaryTree:
     
         return sum_(self.root)    
     
+    #TODO
     #Advanced functionality
 
     #Alternative views
-
+    
     def leftView(self) -> List[int]:
         return []
     
