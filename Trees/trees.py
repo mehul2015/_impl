@@ -24,6 +24,8 @@ class BinaryTree:
 
     def construct(self, nums: List[int]) -> Optional[TreeNode] :
 
+        start = time.time()
+
         if len(nums) == 0: return None
         if len(nums) == 1 : return nums[0]
 
@@ -72,6 +74,8 @@ class BinaryTree:
                 # print("Stack Details : ",stack.stack)
             
             self.root = root.node
+        if self.log:
+            print_elapsed_time(start_time=start)
         self.display()
         return self.root 
     
@@ -327,7 +331,7 @@ class BinaryTree:
     
 
 
-my_tree = BinaryTree(log=True)
+my_tree = BinaryTree(log=False)
 my_tree.construct(nums=[50,25,12,None,None,37,30,None,None,None,75,62,None,70,None,None,87,None,None])
 # my_tree.construct(nums=[1,2,None,None,3,None,None])
 

@@ -24,5 +24,6 @@ class Queue:
             return "There are no elements in the queue to be peeked!"
         return self.queue[0]
         
-        
+    def sort(self):
+        q = sorted(self.queu)
 
